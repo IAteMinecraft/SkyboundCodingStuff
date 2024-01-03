@@ -1,0 +1,35 @@
+local reader = peripheral.find("ship_reader")
+local monitor = peripheral.find("monitor")
+
+local shipPos = reader.getWorldspacePosition()
+local shipName = reader.getShipID()
+
+function GetShipData(_reader)
+ return _reader.getWorldspacePosition(), _reader.getShipID()
+end
+
+function refresh(monitor, waitTime)
+    sleep(waitTime)
+    monitor.clear()
+end
+
+while true do
+
+    local shipPos, shipID = GetShipData(reader)
+    monitor.setCursorPos(1,1)
+    monitor.write("Ship ID: " .. shipID)
+        
+    monitor.setCursorPos(1,2)
+    monitor.write("X: " .. math.floor(shipPos["x"]))
+    
+    monitor.setCursorPos(1,3)
+    monitor.write("Y: " .. math.floor(shipPos["y"]))
+    
+    monitor.setCursorPos(1,4)
+    monitor.write("Z: " .. math.floor(shipPos["z"])) 
+     
+    refresh(monitor, 1)
+    
+    sleep(0)
+    
+end
