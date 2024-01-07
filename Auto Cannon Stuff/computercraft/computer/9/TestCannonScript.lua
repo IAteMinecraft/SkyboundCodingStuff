@@ -1,14 +1,13 @@
-os.loadAPI("CannonMotor.lua")
-os.loadAPI("MathLib.lua")
+os.loadAPI("apis/CannonControllerAPI.lua")
+local controller = CannonControllerAPI
 
-local cannonPosition = vector.new(-32,-53,-24)
+controller.SetOriginPosition(vector.new(-32,-53,-24))
+controller.InitialiseCannon()
 
-CannonMotor.Initialise()
-
---point towards -50,-50,-20
-local targetPosition = vector.new(-50,-50,-20)
-local heading, pitch = MathLib.GetPitchAndHeading(cannonPosition,targetPosition)
-CannonMotor.Execute(heading, pitch)
-
--- return to origin
-CannonMotor.Execute(0, 0)
+controller.AimToward(vector.new(-50,-50,-50))
+controller.SetFire(true)
+print("aiming at: " .. textutils.serialise(controller.GetLastAimPos()) .. " With heading: " ..controller.GetAimRotation().x .. " with pitch: " .. controller.GetAimRotation().y)
+sleep(3)
+controller.SetFire(false)
+print("returning to 0,0")
+controller.SetAimAngles(0,0)

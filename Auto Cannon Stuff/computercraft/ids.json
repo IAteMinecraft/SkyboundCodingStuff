@@ -1,8 +1,8 @@
 {
-  "computer": 20,
+  "computer": 25,
   "peripheral.computer": 3,
   "peripheral.sp_radar": 4,
   "peripheral.modem": 0,
-  "peripheral.radar": 0,
-  "peripheral.monitor": 0
+  "peripheral.radar": 1,
+  "peripheral.monitor": 1
 }
